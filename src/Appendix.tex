@@ -1,0 +1,17 @@
+\pagenumbering{Alph}
+\pagestyle{appendix}
+\renewcommand*{\thepage}{A\arabic{page}}
+\begin{appendices}
+\chapter{Used appliances}\thispagestyle{appendix}
+Some text for the appendix.
+
+\end{appendices}
+\label{AlmostVeryLastPage}
+\clearpage
+\pagenumbering{alph}
+\pagestyle{references}
+\renewcommand*{\thepage}{B\arabic{page}}
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{main}

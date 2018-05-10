@@ -1,0 +1,114 @@
+\chapter{Introduction}
+\cite{barker2014nilm} %TODO
+\section{Defining disaggregation}
+The act of disaggregating something is breaking it into multiple parts. In our case, we are looking to break a signal coming from a single, or multiple sources (see \autoref{chapter-improvements}) into different signals coming from different appliances. Once a signal from an appliance is isolated from the global signal, we would also like to know what signal it is and label it.
+
+\subsection{Non Intrusive Load Monitoring}
+Actually what we mean by energy disaggregation is Non Intrusive Load Monitoring (often abbreviated NILM). Nonintrusive means that we don't have one sensor per appliance, but rather one sensor per electrical network. The purpose of it is to have a simpler installation, fewer costs and an easier way to update the system.
+
+Load monitoring refers to the electrical load, watching it and try to make suppositions about what it means.
+
+\subsection{Different type of devices}
+One thing to keep in mind is that there are a lot of different kind of appliances that use electricity in different kind of ways. Not all appliances need a continuous (meaning the same during all the use-time) AC input at 120V. Actually, there are many types of transformers\cite{harlow2004electric} that don't work the same way and don't necessarily give the same kind of output on a sensor.
+
+There are also appliances that sometimes need a lot of energy, and sometimes don't, like a fridge, an oven or a washing machine. Those appliances often have an identifiable cycle and some studies already address those. But there are also appliances with less predictable cycles, like a drilling machine or other tools.
+
+Waiting for cycles to run in order to identify them could take many minutes, or even hours. This could be a potential problem for some of the applications (see \autoref{section-application})
+
+Having devices using the network in different ways could mean that it would be easy to disaggregate the network, but in practice, it makes it harder because we need multiple ways to collect data, to process them, and eventually make a consensus. This would also mean that the consensus would need to wait for the slowest algorithm to give an output, which would again be a problem for some applications.
+
+Moreover, there are devices that are only in an on/off state and then there are appliances that have multiple states, like a television or a monitor, whose can be on/sleep/off. A laptop or smartphone charger can also have multiple states: on/off but also connected to the laptop or not, and whether the laptop's battery is at full capacity or not.
+
+\section{Current state}
+\subsection{Ways to collect data}
+A lot of the previous work was focused on slowly acquired data, with the current intensity or more generally the consumed power measured with a sampling rate around 1Hz (like REDD\cite{kolter2011redd}). Others have used a much higher precision to sample the data and even got to a rate of a few GHz\cite{gupta2010electrisense}. This last way to collect data is obviously also much more expensive in hardware: it needs costly measurement tools but it is also harder computationally, needing a faster processor.
+
+Beyond collecting data about the consumption, in order to learn automatically one must also collect data about the state of the appliances. There are various ways to do that. The most used is probably using intrusive sensors, more precisely one sensor per appliance just sensing if that appliance is drawing current from the network or not. In order to eliminate noise, there should be one sensor for every appliance that can send a signal to the nonintrusive sensor.
+Some other methods were also designed using thermal imaging\cite{ho2011heatprobe}. This is a bit less intrusive but is also less precise.
+
+There are also multiple public databases if you want to develop an algorithm that needs a lot of data without having to generate it.%http://blog.oliverparson.co.uk/2012/06/public-data-sets-for-nialm.html, http://wiki.nilm.eu/datasets.html
+
+
+
+
+\subsection{Ways to learn}
+Like most of the time when building algorithms in artificial intelligence, there are many ways to build a model that will predict the output. All of them have their disadvantages due to the inductive bias and hopefully, most of them have advantages.
+\subsubsection{Factorial Hidden Markov Model}
+A factorial hidden Markov model (FHMM) is a generalization of the HMM that allows having one HMM per appliance.\cite{parson2014unsupervised} Each appliance can then have multiple hidden states. This solution has been implemented and tested by J. Zico Kolter and Matthew J. Johnson\cite{kolter2011redd} and gave 64.5\% accuracy on the REDD dataset (around 20 monitored appliances).
+
+However, an FHMM needs an exponential number of hidden states: $K^N$ where $K$ is the number of states per appliance and $N$ is the number of appliances. This can become very limiting in real use cases. Some relaxations of the problem exist, like Gibbs sampling, variational Bayes, and variational message passing\cite{parson2014unsupervised}, but this way of solving is still computationally intensive.
+
+\subsubsection{Deep Neural Network}
+Deep neural networks are used in a lot of different kinds of applications of machine learning. Some have tried applying this technique to NILM, with satisfying accuracy on some appliances. The authors of \cite{kelly2015neural} decided to use real data from UK-DALE and generated data in a ratio 50:50 for their experiments. Because neural networks can be trained to detect one appliance, they could test the algorithm on only 5 appliances. In order to keep track of the history of what happens in the network, they used a Recurrent Neural Networks and used small batches of offline disaggregation in order to simulate online disaggregation. They also used a neural network (a Denoising AutoeEcoder, DEA) to remove the noise from the read signal. The results are mitigated; some appliances perform really well on the F1 score but some really don't.
+
+Neural Networks are very expensive to build and need several hours of training per appliance on a current high-end GPU.
+
+\subsubsection{Custom designated Algorithm}
+custom designated algo\cite{gupta2010electrisense}
+
+\subsubsection{Logical rules}
+Sabina Tomkins, Jay Pujara, and Lise Getoor have tried what they call a collective probabilistic approach\cite{tomkins2017disambiguating}. The principle is to group appliances by sets, as some appliances are mostly used together. It should also make it easier to detect as the change on the network is more significant as a set than as a single appliance. Then for each reading and current state, the algorithm outputs a new state. In order to do that, the authors used a hinge loss Markov Random Field (HL-MRF)\cite{bach2015hinge}. This algorithm needs a set of soft logical rules, which are in this case based on the duration of use of the appliances, the different sets of appliances used together, the time and date on which the data is read, and others.
+
+The authors have run their algorithm on the REDD and the DATAPORT datasets, and claim to have reduced errors by previous state-of-the-art algorithms by 50\% and 25\% respectively.
+
+One problem with this algorithm is that it computes what we already know. We need to know when an appliance is likely to be used to detect that it is being used. We need to know which sets of appliances are likely being used together in order to detect one of them. It will probably fail to detect that a light is on during the day, that a heater is on during summer or that air conditioning is on in winter. Although, those are pieces of information that can be very useful when we try to disaggregate a signal, depending on the target (see \autoref{section-target})
+
+
+\subsection{Other}\label{section-vi}
+V-I Trajectory\cite{hassan2014empirical} \cite{lam2007novel}  %https://arxiv.org/pdf/1305.0596.pdf
+
+\cite{do2016applications}%TODO
+
+
+\section{Applications}\label{section-application}
+The purposes of disaggregating such kind of signal are various.
+
+\subsection{Consumption}
+The most used is having an estimate of the consumption of each appliance in a household. This means that we don't need to know exactly and immediately when the state of an appliance changes. All we need is that the mean detected uptime of an appliance is close to its true mean uptime. This could help reduce consumption by knowing what appliance is critical. This could also give hints on what appliance could be replaced by a less power consuming one and in how much time the cost can be absorbed by the gain in electricity consumed.
+
+\subsection{Security}
+Knowing when an appliance with some risks is plugged and on can also be interesting. Using an iron or a hair straightener for too long could mean that someone forgot to plug it off. Detecting this could be interesting. Also, having an air conditioner running in the winter or a heater running in the summer could be a security issue and need to be reported.
+
+\subsection{Home automation}
+Other applications could be used in home automation, to turn on or off something when activity is detected on an appliance for instance.
+
+\section{Target}\label{section-target}
+If there are multiple applications, there are also multiple targets. One application can have multiple targets and one target can have multiple applications. A target could be a household, an electricity provider or a factory for instance. A household would have a lot of small appliances, with a few energy-consuming devices, and most of the appliances probably use SMPS (see \autoref{section-smps}). A factory or a workshop probably uses a lot of high energy-consuming tools and machines.
+
+Such differences are to be taken into account when designing an algorithm.
+
+
+%\section{This thesis path}
+
+
+
+
+\iffalse
+Deep neural networks applied to energy disaggregation\cite{kelly2015neural}
+
+REDD: A public data set for energy disaggregation research\cite{kolter2011redd}
+
+NILM redux: The case for emphasizing applications over accuracy\cite{barker2014nilm}
+
+Nonintrusive load monitoring (NILM) performance evaluation\cite{makonin2015nonintrusive}
+
+An in-depth study into using EMI signatures for appliance identification\cite{gulati2014depth}
+
+ElectriSense: single-point sensing using EMI for electrical event detection and classification in the home\cite{gupta2010electrisense}
+
+HeatProbe: a thermal-based power meter for accounting disaggregated electricity usage\cite{ho2011heatprobe}
+
+Applications of Deep Learning Techniques on NILM\cite{do2016applications}
+
+Approaches to Non-Intrusive Load Monitoring (NILM) in the Home\cite{makonin2012approaches}
+
+Non-intrusive load monitoring approaches for disaggregated energy sensing: A survey\cite{zoha2012non}
+
+Disaggregation of
+Domestic Smart Meter Energy Data\cite{kelly2016disaggregation}
+
+Algorithms for Energy Disaggregation\cite{fiol2016algorithms}
+
+A survey on metric learning for feature vectors and structured data\cite{bellet2013survey}
+
+\fi

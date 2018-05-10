@@ -1,0 +1,189 @@
+%\documentclass[journal]{IEEEtran}
+\documentclass{eplmastersthesis}
+%\documentclass{report}
+%\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+    decorations.pathreplacing,decorations.pathmorphing,shapes,%
+    matrix,shapes.symbols}
+\usepackage[siunitx]{circuitikz}
+\usepackage[]{tocbibind}
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+%\usepackage[style=verbose]{biblatex}
+\usepackage[title, titletoc]{appendix}
+%\usepackage{refcheck}
+%\renewcommand{\includegraphics}[2][]{\fbox{#2}}
+\usepackage{wrapfig}
+\usepackage{fancyhdr}
+%\usepackage[square,sort]{natbib}
+%\bibliographystyle{plainnat}
+
+\graphicspath{{./img/}}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={red!50!black},
+    urlcolor={blue!50!black}
+}
+
+\setlength{\headheight}{13.6pt}
+\makeatletter
+\fancypagestyle{plain}{}
+\fancyhf{}
+\fancyhead[L]{\textsc{William André}}
+\fancyhead[R]{\textsc{\@title, \@subtitle}}
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\fancypagestyle{preamble}{%
+    \fancyhf{}
+    \fancyhead[L]{\textsc{William André}}
+    \fancyhead[R]{\textsc{\@title, \@subtitle}}
+    \rfoot{Page \thepage}
+}
+\fancypagestyle{appendix}{%
+    \fancyhf{}
+    \fancyhead[L]{\textsc{William André}}
+    \fancyhead[R]{\textsc{\@title, \@subtitle}}
+    \rfoot{Page \thepage \hspace{1pt} of \pageref{AlmostVeryLastPage}}
+}
+\fancypagestyle{references}{%
+    \fancyhf{}
+    \fancyhead[L]{\textsc{William André}}
+    \fancyhead[R]{\textsc{\@title, \@subtitle}}
+    \rfoot{Page \thepage \hspace{1pt} of \pageref{VeryLastPage}}
+}
+\makeatother
+
+
+\makeatletter
+\def\@makechapterhead#1{%
+  %%%%\vspace*{50\p@}% %%% removed!
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 10\p@
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@makeschapterhead#1{%
+  %%%%%\vspace*{50\p@}% %%% removed!
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Huge \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+ 
+
+%\renewcommand{\baselinestretch}{2} % lol xptdr xD
+
+\usepackage{hyperref}
+\hypersetup{
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%\patchcmd{\chapter}{plain}{empty}{}{}
+\begin{document}
+
+\pagenumbering{Roman}
+\input{src/Title.tex}
+%\thispagestyle{empty}		% To suppress header and footer on the back of the cover page
+
+\begin{abstract}
+The energy disaggregation is an abstract abstraction abstracting the abstract abstrat...
+\vspace*{3cm}
+\section*{Acknowledgements}
+The author would like to thank professor Pierre Schauss for his guidance.
+\end{abstract}
+
+%\begin{IEEEkeywords}
+%Disaggregation, Energy, NILM
+%\end{IEEEkeywords}
+
+\setcounter{tocdepth}{1}
+\tableofcontents\thispagestyle{preamble}
+\listoffigures\thispagestyle{preamble}
+\newpage
+
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\input{src/Introduction.tex}\thispagestyle{fancy}
+\newpage\input{src/Opensource.tex}\thispagestyle{fancy}
+\newpage\input{src/Background.tex}\thispagestyle{fancy}
+\newpage\input{src/Requirements.tex}\thispagestyle{fancy}
+\newpage\input{src/Implementation.tex}\thispagestyle{fancy}
+\newpage\input{src/Usage.tex}\thispagestyle{fancy}
+\newpage\input{src/Results.tex}\thispagestyle{fancy}
+\newpage\input{src/Evaluation.tex}\thispagestyle{fancy}
+\newpage\input{src/Improvements.tex}\thispagestyle{fancy}
+\newpage\input{src/Conclusion.tex}\thispagestyle{fancy}
+\label{LastPage}
+\newpage\input{src/Appendix.tex}\thispagestyle{references}
+\label{VeryLastPage}
+
+\backcoverpage
+
+
+
+\iffalse
+ACKNOWLEDGEMENTS
+
+TABLE OF CONTENT
+
+TABLE OF FIGURES
+
+I.  INTRODUCTION
+	A.  Defining disaggregation
+		1)  Different type of devices
+	B.  Current state
+		1)  Ways to learn
+		2)  Ways to collect data
+		3)  Other
+	C.  Applications
+
+II.  CHOICE OF OPEN-SOURCE
+	A.  Existing projects
+		1)  Commercial
+		2)  Open-source
+	B.  Why GPLv3
+
+III.  IMPLEMENTATION
+	A.  Architecture
+	B.  Algorithms chosen
+	C.  Tools
+	
+IV.  RESULTS
+
+V.  EVALUATION
+
+VI.  IMPROVEMENTS
+	A.  Add voltage sensor
+	B.  Use multiple sensors
+	C.  Develop automatic learning
+		1)  For the metaparameters
+		2)  For the appliances
+	D.  Sample at higher rates
+
+VII.  CONCLUSION
+
+VIII.  REFERENCES
+
+APPENDIX A. USED APPLIANCES
+\fi
+
+
+\end{document}
