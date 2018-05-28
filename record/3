@@ -1,0 +1,71 @@
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.7550225647826526 // big event
+  DEBUG: vote : {u'halogen:on': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : halogen:on,   0.0001907806180892069 // small difference
+   INFO: Last detected item : halogen:on
+  DEBUG: a7e936296e3eeb6e9375e8232f7f50eab300210f added to halogen:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.7370773875740073 // big event
+  DEBUG: vote : {u'halogen:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : halogen:off,   0.0001254283903954186 // small difference
+   INFO: Last detected item : halogen:off
+  DEBUG: 963d5656957a5c71abef27eaf56e12813ee0f024 added to halogen:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.14560215127341744
+  DEBUG: vote : {u'phone-charger:on': 2, u'cfl:on': 3} // close decision
+  DEBUG: ------------------------------                // but correct one
+  DEBUG: closest : cfl:on,   0.0026766932172822776
+   INFO: Last detected item : cfl:on
+  DEBUG: f5cd465db0236b1935d23113c9629c37727cc2c6 added to cfl:on
+  DEBUG: ------------------------------       // the cfl was already hot so
+  DEBUG: Event detected : 0.1380228954135261  // no transient state detected
+  DEBUG: vote : {u'cfl:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:off,   0.0032405111611725434
+   INFO: Last detected item : cfl:off
+  DEBUG: 54db9ec2e7999f125927b281907a50705c9522a2 added to cfl:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.1555232745098039
+  DEBUG: vote : {u'charger:plugcharger': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:plugcharger,   0.002060674074574534
+   INFO: Last detected item : charger:plugcharger
+  DEBUG: 8c3878a7c3d02edb1f1ce4248e7a32858b73e493 added to charger:plugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.12384927450980979
+  DEBUG: vote : {u'halogen:on': 5}      // completely false, this should be
+  DEBUG: ------------------------------ // charger:eco
+  DEBUG: closest : halogen:on,   0.009762717041995597
+   INFO: Last detected item : halogen:on
+  DEBUG: 1b6c24ee22608872546e040d62a9aa862a396d91 added to halogen:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.19908401266019932
+  DEBUG: vote : {u'charger:unplugcharger': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:unplugcharger,   0.0008284277670078396
+   INFO: Last detected item : charger:unplugcharger
+  DEBUG: aba24a63725a0e9ae0805e4566a57fc7d820b9a3 added to charger:unplugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.19847727994526662
+  DEBUG: vote : {u'charger:plugcharger': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:plugcharger,   0.0012092366213484157
+   INFO: Last detected item : charger:plugcharger
+  DEBUG: faeb67c0fa5eda52004db42f5003c10bfcdec849 added to charger:plugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.4072501656044961
+  DEBUG: vote : {u'charger:plug': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:plug,   0.008266903377973133
+   INFO: Last detected item : charger:plug
+  DEBUG: 784f46d1827fa5272c8952e59ad0b42b6c461dce added to charger:plug
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.2631775164495312
+  DEBUG: vote : {u'charger:eco': 4, u'charger:plugcharger': 1}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:eco,   0.00783516468072297
+   INFO: Last detected item : charger:eco  // now it is detected correctly
+  DEBUG: 72a24d53ea28d847cfcce29f2d1b3983eb7510f7 added to charger:eco
+  DEBUG: ------------------------------    // without much hesitation

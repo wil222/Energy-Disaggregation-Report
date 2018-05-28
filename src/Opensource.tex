@@ -1,19 +1,19 @@
-\chapter{Choice of open-source}
+\chapter{Choice of open-source}\label{section:open-source}
 As trying to disaggregate the energy consumption is a problem that has been studied for many years now, many projects already exist. They are mostly commercial projects, and because the technology is evolving but the companies are not always following, those projects fail to grow and persist.
 
 %TODO https://gigaom.com/2011/06/26/5-reasons-google-powermeter-didnt-take-off/
 \section{Existing projects}
 \subsection{Commercial}
-There are a few companies that sell bundles. Amongst the 6 best ones selected by OhmHome\cite{opensourcelist}, only 2 advertise an appliance level detection. One other of the selected ones even only detects appliances that consume above 400W.
+There are a few companies that sell bundles. Amongst the 6 best ones selected by OhmHome \cite{opensourcelist}, only 2 advertise an appliance level detection. One other of the selected ones even only detects appliances that consume above 400W.
 
 Most of the solutions use an easy way to collect necessary data, either by plugging a socket onto the network, or by clamping a sensor around an electricity cable.
 \subsection{Open-source}
 Few people have tried to make an open source project. The most popular ones are NILMTK\footnote{\url{https://github.com/nilmtk/nilmtk}}\cite{batra2014nilmtk} under Apache 2.0, and NeuralNILM\footnote{\url{https://github.com/JackKelly/neuralnilm}}\cite{kelly2015neural} also under Apache 2.0. Another one is Appliance Energy Detector\footnote{\url{https://github.com/dinoboy197/Appliance-Energy-Detector}}, that is under GNU Affero 3.
 
-None of these projects work directly with sensors. They are all relying on data aquired by others on a long time, mostly using the REDD datasets. This implies that it is working with a power meter, that is in series on the network.
+None of these projects work directly with sensors. They are all relying on data aquired by others on a long time, mostly using the \acrshort{redd} datasets. This implies that it is working with a power meter, that is in series on the network.
 \section{Why GPLv3}
-There are quite some researchers working on the NILM problem. A lot of different techniques have been tested and hopefully a lot more will be. While some previous work inspired me in doing this thesis, I hope my work will be used too.
+There are quite some researchers working on the \acrshort{nilm} problem. A lot of different techniques have been tested and hopefully a lot more will be. While some previous work inspired me in doing this thesis, I hope my work will be used too.
 
 The goal is to have one framework compatible with as much different algorithms as possible. This would greatly improve the comparison between them. Indeed comparing the precision of the algorithms in similar cases is lacking today, yet it is something important.
 
-I am also trying to make the world more transparent and less centralised. A lot of discussions about the IT are centred on the internet being owned by a few companies. Google indeed tried to make a NILM algorithm, and even if it was abandoned\footnote{\url{https://gigaom.com/2011/06/26/5-reasons-google-powermeter-didnt-take-off/}t}, this would have been one more step in one of those companies knowing all about us. Even if it doesn't bother everyone, I am giving the opportunity to the others to make their own system in exchange for their contribution if they can improve it.
+I am also trying to make the world more transparent and less centralised. A lot of discussions about the IT are centred on the internet being owned by a few companies. Google indeed tried to make a \acrshort{nilm} algorithm, and even if it was abandoned \cite{googleabandon}, this would have been one more step in one of those companies knowing all about us. Even if it doesn't bother everyone, I am giving the opportunity to the others to make their own system in exchange for their contribution if they can improve it.

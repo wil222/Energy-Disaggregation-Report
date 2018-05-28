@@ -1,0 +1,56 @@
+  DEBUG: command : load *pkl
+  DEBUG: Variables(function=u'load', path=u'*pkl')
+WARNING: phone-charger.pkl is already in the appliances
+   INFO: charger loaded
+   INFO: halogen loaded
+   INFO: cfl loaded
+  DEBUG: Event detected : 0.08063846374649572
+  DEBUG: vote : {u'phone-charger:on': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:on,   0.004948191386333334
+   INFO: Last detected item : phone-charger:on
+  DEBUG: b0b024f91e4bcf81b33cfb7e2c78b85693da5394 added to phone-charger:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.13126953067202496
+  DEBUG: vote : {u'phone-charger:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:off,   0.0003719300444155546
+   INFO: Last detected item : phone-charger:off
+  DEBUG: 617fc74c4edd53f912134c4f74b14a44bc60d477 added to phone-charger:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.0797973460074973
+  DEBUG: vote : {u'phone-charger:on': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:on,   0.0011153806269011575
+   INFO: Last detected item : phone-charger:on
+  DEBUG: d2ca394221a323544922128d76e4396d7263cb9d added to phone-charger:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.12531188995064715
+  DEBUG: vote : {u'phone-charger:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:off,   0.0002156539401325494
+   INFO: Last detected item : phone-charger:off
+  DEBUG: ac7be589004973b860b58e2e9806827e1a7f8793 added to phone-charger:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.16118075490196077
+  DEBUG: vote : {u'charger:plugcharger': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:plugcharger,   0.003565027541521106
+   INFO: Last detected item : charger:plugcharger
+  DEBUG: bb71138e5b0957f3df5ca117aaa60213a795854a added to charger:plugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.27483236780313186
+  DEBUG: vote : {u'phone-charger:on': 5} // This should be charger:plug
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:on,   0.013803603643655566 // event too far
+  DEBUG: c741b5911091928a0d1c6d1ae12ffcc049b9046c added to item_4:on
+   INFO: New state on added to appliance item_4
+   INFO: New item : item_4   // At least it is assigned on a new appliance
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.22351504118482468
+  DEBUG: vote : {u'charger:eco': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:eco,   0.006231975420696788
+   INFO: Last detected item : charger:eco
+  DEBUG: 6707327dc171d18e3dd2d7bc2cef91944bec6a4d added to charger:eco
+  DEBUG: ------------------------------

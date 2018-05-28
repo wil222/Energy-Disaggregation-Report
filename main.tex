@@ -1,24 +1,30 @@
-%\documentclass[journal]{IEEEtran}
 \documentclass{eplmastersthesis}
-%\documentclass{report}
-%\usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
     decorations.pathreplacing,decorations.pathmorphing,shapes,%
     matrix,shapes.symbols}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
 \usepackage[siunitx]{circuitikz}
 \usepackage[]{tocbibind}
-%\usepackage[utf8]{inputenc}
-%\usepackage[english]{babel}
+\usepackage{tocloft}
 %\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 %\usepackage[style=verbose]{biblatex}
 \usepackage[title, titletoc]{appendix}
-%\usepackage{refcheck}
-%\renewcommand{\includegraphics}[2][]{\fbox{#2}}
 \usepackage{wrapfig}
 \usepackage{fancyhdr}
-%\usepackage[square,sort]{natbib}
-%\bibliographystyle{plainnat}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage[acronym,toc]{glossaries}
+
+%\usepackage{refcheck}
+%\renewcommand{\includegraphics}[2][]{\fbox{#2}}
+%\renewenvironment{tikzpicture}{}{}
+%\renewenvironment{circuitikz}{}{}
+\renewcommand{\baselinestretch}{1.1}
 
 \graphicspath{{./img/}}
 
@@ -27,6 +33,12 @@
     linkcolor={red!50!black},
     citecolor={red!50!black},
     urlcolor={blue!50!black}
+}
+
+\lstset{%
+  basicstyle=\footnotesize\ttfamily,
+  frame=single,
+  morecomment=[l][\color{red!75!black}]{//},
 }
 
 \setlength{\headheight}{13.6pt}
@@ -79,9 +91,12 @@
     \vskip 40\p@
   }}
 \makeatother
- 
 
-%\renewcommand{\baselinestretch}{2} % lol xptdr xD
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{preamble}}} 
+\AtBeginDocument{\addtocontents{acn}{\protect\thispagestyle{preamble}}} 
+
+%\setlength{\cftbeforetoctitleskip}{0em}
+ 
 
 \usepackage{hyperref}
 \hypersetup{
@@ -93,8 +108,43 @@
     urlcolor=cyan           % color of external links
 }
 
-\hyphenation{op-tical net-works semi-conduc-tor}
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\qquad\numberline{\hspace{-0.5em}\theequation}\quad#1}\par}
 
+\makeglossaries
+\newacronym{nilm}{NILM}{Non Intrusive Load Monitoring}
+\newacronym{redd}{REDD}{Reference Energy Disaggregation Data Set}
+\newacronym{smps}{SMPS}{Switch Mode Power Supply}
+\newacronym{ac}{AC}{Alternative Current}
+\newacronym{dea}{DEA}{Denoising AutoEncoder}
+\newacronym{fhmm}{FHMM}{Factorial Hidden Markov Chain}
+\newacronym{hmm}{HMM}{Hidden Markov Chain}
+\newacronym{hlmrf}{HL-MRF}{Hinge Loss Markov Random Field}
+\newacronym{annlm}{ANN-LM}{Artificial Neural Network with Levenberg-Marquard}
+\newacronym{annea}{ANN-EA}{Artificial Neural Network with evolutionary algorithm}
+\newacronym{svm}{SVM}{Support Vector Machine}
+\newacronym{adaboost}{AdaBoost}{Adaptive Boost}
+\newacronym{emi}{EMI}{Electromagnetic Interference}
+\newacronym{esr}{ESR}{Equivalent Series Resistance}
+\newacronym{esl}{ESL}{Equivalent Series Inductance}
+\newacronym{ft}{FT}{Fourier Transform}
+\newacronym{fft}{FFT}{Fast Fourier Transform}
+\newacronym{rfft}{rFFT}{Real Fast Fourier Transform}
+\newacronym{dft}{DFT}{Discrete Fourier Transform}
+\newacronym{lti}{LTI}{Linear Time Invariant}
+\newacronym{gpu}{GPU}{Graphic Processing Unit}
+\newacronym{cpu}{CPU}{Central Processing Unit}
+\newacronym{pli}{PLI}{Power Line Interface}
+\newacronym{usrp}{USRP}{Universal Software Radio Peripheral}
+\newacronym{knn}{k-NN}{K-Nearest Neighbors}
+\newacronym{cfl}{CFL}{Compact Fluorescent Lamp}
+\newacronym{cli}{CLI}{Command Line Interface}
+\newacronym{gui}{GUI}{Graphical User Interface}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\renewcommand*{\glsgroupskip}{}
 %\patchcmd{\chapter}{plain}{empty}{}{}
 \begin{document}
 
@@ -115,19 +165,21 @@ The author would like to thank professor Pierre Schauss for his guidance.
 
 \setcounter{tocdepth}{1}
 \tableofcontents\thispagestyle{preamble}
-\listoffigures\thispagestyle{preamble}
+\newpage\listoffigures\thispagestyle{preamble}
+\newpage\listofmyequations\thispagestyle{preamble}
+\addcontentsline{toc}{chapter}{\listequationsname}
+\newpage\printglossary[type=\acronymtype,title=List of acronyms]\printglossary\thispagestyle{preamble}
 \newpage
 
 \pagenumbering{arabic}
 \pagestyle{fancy}
 
 \input{src/Introduction.tex}\thispagestyle{fancy}
-\newpage\input{src/Opensource.tex}\thispagestyle{fancy}
 \newpage\input{src/Background.tex}\thispagestyle{fancy}
 \newpage\input{src/Requirements.tex}\thispagestyle{fancy}
+\newpage\input{src/Opensource.tex}\thispagestyle{fancy}
 \newpage\input{src/Implementation.tex}\thispagestyle{fancy}
 \newpage\input{src/Usage.tex}\thispagestyle{fancy}
-\newpage\input{src/Results.tex}\thispagestyle{fancy}
 \newpage\input{src/Evaluation.tex}\thispagestyle{fancy}
 \newpage\input{src/Improvements.tex}\thispagestyle{fancy}
 \newpage\input{src/Conclusion.tex}\thispagestyle{fancy}
@@ -137,53 +189,6 @@ The author would like to thank professor Pierre Schauss for his guidance.
 
 \backcoverpage
 
-
-
-\iffalse
-ACKNOWLEDGEMENTS
-
-TABLE OF CONTENT
-
-TABLE OF FIGURES
-
-I.  INTRODUCTION
-	A.  Defining disaggregation
-		1)  Different type of devices
-	B.  Current state
-		1)  Ways to learn
-		2)  Ways to collect data
-		3)  Other
-	C.  Applications
-
-II.  CHOICE OF OPEN-SOURCE
-	A.  Existing projects
-		1)  Commercial
-		2)  Open-source
-	B.  Why GPLv3
-
-III.  IMPLEMENTATION
-	A.  Architecture
-	B.  Algorithms chosen
-	C.  Tools
-	
-IV.  RESULTS
-
-V.  EVALUATION
-
-VI.  IMPROVEMENTS
-	A.  Add voltage sensor
-	B.  Use multiple sensors
-	C.  Develop automatic learning
-		1)  For the metaparameters
-		2)  For the appliances
-	D.  Sample at higher rates
-
-VII.  CONCLUSION
-
-VIII.  REFERENCES
-
-APPENDIX A. USED APPLIANCES
-\fi
 
 
 \end{document}

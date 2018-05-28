@@ -1,0 +1,44 @@
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.44333056201087256
+  DEBUG: vote : {u'charger:plug': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:plug,   0.007509648839239835
+   INFO: Last detected item : charger:plug
+  DEBUG: 16dcf2c8152c198e0596712f614e780f502a6ddf added to charger:plug
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.15717520635461477
+  DEBUG: vote : {u'charger:eco': 4, u'charger:plugcharger': 1}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:eco,   0.009163695467798175
+   INFO: Last detected item : charger:eco
+  DEBUG: 46288c93bb5f08f1d559780db8ddae1f7a73eccb added to charger:eco
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.5867488334762128
+  DEBUG: vote : {u'charger:unplug': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:unplug,   0.00099985053734729
+   INFO: Last detected item : charger:unplug
+  DEBUG: 3ce5e793c695d8e21c9644612705f3184c46a04e added to charger:unplug
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.19421562862117842
+  DEBUG: vote : {u'charger:unplugcharger': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:unplugcharger,   0.0009247257183946326
+   INFO: Last detected item : charger:unplugcharger
+  DEBUG: 38716178da5489bc3b67eee09848ea5cf81f4d9b added to charger:unplugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.3373034285772591
+  DEBUG: vote : {u'phone-charger:on': 2, u'cfl:on': 3} // the decision was close
+  DEBUG: ------------------------------                // but correct
+  DEBUG: closest : cfl:on,   0.002023164796862339
+   INFO: Last detected item : cfl:on
+  DEBUG: 4dcbd12c86ff5565499badbdec7326365a7b29c9 added to cfl:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.20470954291634816
+  DEBUG: vote : {u'cfl:eco': 3, u'cfl:off': 2}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:eco,   0.010462765603879029  // the decision was correct 
+  DEBUG: e6dc1d760ed71dd580b2b8ae9d1ad32bcaba218a added to item_5:on
+   INFO: New state on added to appliance item_5     // but over the threshold
+   INFO: New item : item_5
+  DEBUG: ------------------------------

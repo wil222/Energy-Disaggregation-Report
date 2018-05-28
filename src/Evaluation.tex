@@ -1,2 +1,42 @@
-\chapter{Evaluation}
+\chapter{Results and Evaluation}
+\section{Results}
+\subsubsection{Phase one}
+The very first phase in testing the precision of the algorithm was to have a nearly perfect precision on the training phase (i.e., no other appliance is emitting \acrshort{emi}). This is almost trivial because we can just add more points and even if the signal is not always the same, with an increasing number of points, the \acrshort{knn} should choose the right label. Actually, once there was more than $k/2$ examples of the right class (where $k$ is the parameter of the \acrshort{knn}), there were almost never errors while doing the training.
+Also, for appliances where there are only 2 status, there are no errors possible because the algorithm can only choose one. This part is more interesting for the laptop charger for instance. The following actions are detected :
+\begin{description}
+\item[\texttt{charger:plugcharger}] When we plug the charger in the electrical socket without plugging the laptop in
+\item[\texttt{charger:unplugcharger}] When we unplug the charger of the electrical socket and the laptop wasn't plugged
+\item[\texttt{charger:plug}] When the charger was already in the electrical socket and the laptop is plugged in
+\item[\texttt{charger:unplug}] When we unplug the laptop but the charger is still plugged
+\item[\texttt{charger:eco}] This should be detected a short while after \texttt{charger:plug}
+\end{description}
+
+This works very well in practice. Every one of these individual actions has a high precision. No rigorous methodology was implemented because of the lack of a dataset usable, but I could play with the charger dozens of times without getting any errors. But it worked even better than just recognising those events. For instance, when I first plug the charger into the laptop, 3 events are detected : \texttt{charger:plugcharger}, \texttt{charger:plug} and then \texttt{charger:eco}.
+
+Also, there is only one state that is prevented from being detected : the last one that was detected. So if the last action was \texttt{charger:unplug}, and that I remove the charger from the socket, the 4 other actions have an equal prior probability of being detected. Now the algorithm should make the difference between those actions thanks to the \acrshort{fft}, but since we take the absolute value of it, we could expect that the algorithm has roughly 0.5 chances of picking \texttt{charger:plugcharger} and 0.5 chances of picking \texttt{charger:unplugcharger}. They should after all have the exact opposite effect on the \acrshort{emi} read, so the the absolute value should be the same. But in practice it works really well again.
+
+We discussed in \autoref{section:knn} that 5 might not be the best value for the parameter $k$ of the \acrshort{knn}. In this phase of the training evaluation, $k=1$ would already be a very good decision since all the 5 closest points are generally from the correct class.
+
+\subsubsection{Phase two}
+The second phase for evaluation of the algorithm is now to put the data from all the appliances together and see if the algorithm can make the difference between the different appliances, and not only between the different states of an appliance. The only limitation is that we only power up on appliance at the time. The logs have been put in the Appendix \ref{section:cli-dumps}.
+
+Most of the time, there is no problem making differences between different appliances, but sometimes surprising decisions are made. On the log in \autoref{section:a1} for instance, when I plugged my charger inside my laptop, the 5 closest items detected where \texttt{phone-charger:on} instead of \texttt{charger:plug}. Not one of the closest was of the correct class. At least, that was not considered as a correct decision because the points where too far, and a new appliance was created. 
+
+In the log of \autoref{section:a3}, it is even more surprising because there is a detected event right after I plugged my laptop charger when nothing actually happened. It has been assigned to \texttt{halogen:on} with an absolute majority by the \acrshort{knn}, and was accepted because the difference was apparently not too far.
+
+We can see that there are already more difficulties than in the first phase of the evaluation, but the results are not too bad. The only recurrent error, which happened less than 10\% of the time, was a confusion between \texttt{cfl:eco} and \texttt{charger:unplugcharger} after then event \texttt{cfl:on} happened.
+
+\subsubsection{Phase three}
+Now, lets do a real test : trying to detect the correct labels when there are other things happening on the network. In order not to have a limitation of the sensor as seen in \autoref{section:appliances} on \autoref{fig:gui-overflow}, I will start by only using appliances that draw little current.
+
+The two appliances I choose are the phone charger and the \acrshort{cfl}. If I first connect the phone charger, almost all the events of the \acrshort{cfl} are correctly classified, without any confusion with any other appliance. The confusion between \texttt{cfl:eco} and \texttt{charger:unplugcharger} mentionned on phase two has a higher probability of happening.
+
+You can see on \autoref{section:a4} some interractions between the appliances when something is wrongly labelled. Because the phone charger was connected, when I shut down the \acrshort{cfl}, an other even was detected. This had a side effect of making the next decision wrong too : because the algorithm thought that the \acrshort{cfl} was still on, the data points corresponding to \texttt{cfl:on} weren't even part of the decision algorithm.
+
+Now, if I do the opposite, the results become worse. When I try to plug/unplug my phone charger when the \acrshort{cfl} is on, the algorithm mostly detects a switch in the state of the \acrshort{cfl}. There is an example of this in \autoref{section:a5}. Surprisingly, one of the times, the points taken into account for the vote of the \acrshort{knn} where all of the correct class \texttt{phone-charger:off} while most of the time only one or less example from the good class are into the 5 closest points.
+
+\section{Evaluation}
 \cite{makonin2015nonintrusive}
+The lack of rigorous methodology to compute the accuracy of the algorithm makes it hard to compare with previous work. I am however confident that the work produced can be useful and a first step towards a working solution at least as good as proprietary solutions. The limitations we saw on Phase three will most likely be amended with a better split core current transformer.
+
+The information about an appliance are also small and easily downloadable, as it doesn't depend on the home configuration like in \cite{gupta2010electrisense}. If the appliance is not registered yet, you also can train the algorithm really quickly manualy. Letting the algorithm only know the appliances it could possibly know obviously reduces the possibility of false labelling.

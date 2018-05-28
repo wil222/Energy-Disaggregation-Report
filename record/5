@@ -1,0 +1,64 @@
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.3223729141974448
+  DEBUG: vote : {u'cfl:on': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:on,   0.0030438595515697247
+   INFO: Last detected item : cfl:on  // correct
+  DEBUG: 6a6b9af2d8ccb6e01187f1c73407843ab0dee0fb added to cfl:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.18542715134593887
+  DEBUG: vote : {u'cfl:eco': 4, u'cfl:off': 1}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:eco,   0.008441192861521523
+   INFO: Last detected item : cfl:eco // correct
+  DEBUG: efa5045b2f24d557c209a9be2169d547be1dd738 added to cfl:eco
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.11729532880812747
+  DEBUG: vote : {u'cfl:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:off,   0.0038067538235696057
+   INFO: Last detected item : cfl:off // should be phone-charger:off
+  DEBUG: 949bb5ae825b3dc4c46815a749a6302e3ff133da added to cfl:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.0814819773415312
+  DEBUG: vote : {u'charger:plugcharger': 2, u'cfl:on': 3}
+  DEBUG: ------------------------------ // knn all wrong
+  DEBUG: closest : cfl:on,   0.005001223972811635
+   INFO: Last detected item : cfl:on // should be phone-charger:on
+  DEBUG: 3faa6b8e176ee157642dfdd8c0c144f82f32dc2c added to cfl:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.12514661784513362
+  DEBUG: vote : {u'phone-charger:off': 1, u'cfl:off': 4}
+  DEBUG: ------------------------------ // only one good example in knn
+  DEBUG: closest : cfl:off,   0.0015976758503038115
+   INFO: Last detected item : cfl:off // should be phone-charger:off
+  DEBUG: 41738da1be650361524a6e0f4ddf66342035e0c2 added to cfl:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.08117653629368683
+  DEBUG: vote : {u'charger:plugcharger': 4, u'cfl:on': 1}
+  DEBUG: ------------------------------
+  DEBUG: closest : charger:plugcharger,   0.0028684581881120003
+   INFO: Last detected item : charger:plugcharger // phone-charger:off
+  DEBUG: 0b75aa1ba4866268cf89b2da46d2fdb011753a70 added to charger:plugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.12166562993940819
+  DEBUG: vote : {u'phone-charger:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:off,   0.008937255527108015
+   INFO: Last detected item : phone-charger:off // correct
+  DEBUG: f1b44bf5fd2fe7a976b9a93a369569de4755780c added to phone-charger:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.07701369413487455
+  DEBUG: vote : {u'phone-charger:on': 1, u'cfl:on': 4}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:on,   0.005262509351956492
+   INFO: Last detected item : cfl:on  // should be phone-charger:off
+  DEBUG: 2002326fc46f2234d0a5b1b722eb1de5508c9bc6 added to cfl:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.14391945813781534
+  DEBUG: vote : {u'cfl:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:off,   0.0023865657061215672
+   INFO: Last detected item : cfl:off // correct
+  DEBUG: 8b6c90ffca9c7a86e1db2771212762e73bb5a8e8 added to cfl:off
+  DEBUG: ------------------------------

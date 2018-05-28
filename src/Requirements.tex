@@ -1,1 +1,16 @@
-\chapter{Requirements}
+\chapter{Requirements}\label{section:requirements}
+The requirements asked to do the thesis were not strictly defined. I had to make choices myself in order to know which directions to take.
+
+One of my main goals was to make energy disaggregation available and affordable for anyone and easily integrable with other projects.
+
+\begin{description}
+\item[Hardware] In order for anyone to be able to use the result of the thesis, the hardware should be cheap, or at least not expensive. The range of measurement tools can vary from thousands of euros for a \acrfull{usrp}, to a few euro for a split core current transformer.
+\item[Code availability] The code should be available so that anyone can tweak it to its own needs. However it shouldn't need any tweaks for it to run properly \textit{out of the box}. It should also be easy to install the software.
+\item[Linking with other projects] Knowing the state of appliances is great, but it is better if we can communicate and share this information with other softwares.
+\item[Computational complexity] The algorithm should not need a dedicated \acrshort{gpu} or some kind of super-computer to run. On the opposite, it should run in the background of a tiny computer without any problem. 
+\item[Real time] Most of the time, in order to be usefully linked with other projects, the disaggregation should not wait too long before detecting something.
+\item[Appliances] The project is destined to households and the type and number of appliances most of them use. The type of those appliances is mostly electronics and appliances with a switch mode power supply.
+\item[Prior] We shouldn't need to know what too much about the habits of the use of the appliances so that something out of the habits has as much chances of being detected as something within the habits.
+\end{description}
+
+Another requirement was that it should be open-source, more details on \autoref{section:open-source}.

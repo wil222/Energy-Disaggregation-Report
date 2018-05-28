@@ -2,8 +2,21 @@
 \pagestyle{appendix}
 \renewcommand*{\thepage}{A\arabic{page}}
 \begin{appendices}
-\chapter{Used appliances}\thispagestyle{appendix}
-Some text for the appendix.
+\chapter{CLI logs dumps}\thispagestyle{appendix}\label{section:cli-dumps}
+Here are some interesting dumps of the \acrshort{cli} printings with DEBUG level. There are lots an lots of tests that work correctly, but they are not displayed here because there is nothing to say about it. Don't take this as an evaluation of the precision of the algorithm.
+
+Comments added afterwards about what should have happened is written in red in the dumps.
+
+\section{}\label{section:a1}
+\lstinputlisting{record/1}
+\section{}\label{section:a2}
+\lstinputlisting{record/2}
+\section{}\label{section:a3}
+\lstinputlisting{record/3}
+\section{}\label{section:a4}
+\lstinputlisting{record/4}
+\section{}\label{section:a5}
+\lstinputlisting{record/5}
 
 \end{appendices}
 \label{AlmostVeryLastPage}

@@ -1,0 +1,57 @@
+  DEBUG: Event detected : 0.08409204307433134
+  DEBUG: vote : {u'phone-charger:on': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:on,   0.0016907326423161468
+   INFO: Last detected item : phone-charger:on     // correct
+  DEBUG: 6932c838ee76d16920af96d25b2200d0cb75f276 added to phone-charger:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.31604381438664925
+  DEBUG: vote : {u'charger:plugcharger': 2, u'cfl:on': 3}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:on,   0.007274524780011398
+   INFO: Last detected item : cfl:on              // correct
+  DEBUG: aea9831fdfd94c4bd6baf46590bedc8069404a31 added to cfl:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.1835353247326181
+  DEBUG: vote : {u'charger:unplugcharger': 4, u'cfl:off': 1}
+  DEBUG: ------------------------------           // should be cfl:off
+  DEBUG: closest : charger:unplugcharger,   0.010225113472859232
+  DEBUG: eba0f96247969df1af4a97382768d0843108243a added to item_0:on
+   INFO: New state on added to appliance item_0
+   INFO: New item : item_0                        // at least it is too far
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.3262332653516681
+  DEBUG: vote : {u'charger:plugcharger': 5}       // should be cfl:on
+  DEBUG: ------------------------------           // but cfl is still set to on
+  DEBUG: closest : charger:plugcharger,   0.00827749652305428
+   INFO: Last detected item : charger:plugcharger //so it detects something else
+  DEBUG: 783ef1aa0654081b6f9b46834256be4699ccb63a added to charger:plugcharger
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.1709016637169459
+  DEBUG: vote : {u'cfl:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:off,   0.00915565238096661
+   INFO: Last detected item : cfl:off             // correct
+  DEBUG: 7b328ef29b1da7d505a06022ae6915afa10416a3 added to cfl:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.3241601743360306
+  DEBUG: vote : {u'phone-charger:off': 1, u'cfl:on': 4}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:on,   0.0015453915942205596
+   INFO: Last detected item : cfl:on             // correct
+  DEBUG: c299f25e8d87d5323c9ce51fad2178ed2fd0060e added to cfl:on
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.15573912793148928
+  DEBUG: vote : {u'cfl:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : cfl:off,   0.0017103430273959857
+   INFO: Last detected item : cfl:off            // correct
+  DEBUG: 71025343ef0a8d0eea0a76d682f456d5755a02c9 added to cfl:off
+  DEBUG: ------------------------------
+  DEBUG: Event detected : 0.12187895127827006
+  DEBUG: vote : {u'phone-charger:off': 5}
+  DEBUG: ------------------------------
+  DEBUG: closest : phone-charger:off,   0.001505212698949356
+   INFO: Last detected item : phone-charger:off  // correct
+  DEBUG: 46438e50497431a7c6cc86730cca6c528bc7d5bc added to phone-charger:off
+  DEBUG: ------------------------------

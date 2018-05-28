@@ -1,8 +1,56 @@
-\chapter{Improvements}
-\label{chapter-improvements}
+\chapter{Improvements}\label{chapter-improvements}
+There are multiple ideas of improvement listed below, which I couldn't implement because of either lack of time, lack of resources, or because it violates the requirements I wanted to keep(\autoref{section:requirements}).
+\section{Improve sensor range}
+We have seen that there are limitations in the maximum current that we can read with the sensor I used. Using a better sensor would hopefully improve the results of the disaggregation.
+
 \section{Add voltage sensor}
+Previous research have shown that adding a sensor able to sample the voltage value can give helpful data to help to disaggregate \cite{bruneel2018energy,hassan2014empirical,lam2007novel}. This can indeed be done without a lot of difficulties with similar hardware as the one used for this thesis. All we would need is a second sound card to do the sampling, and a resistance to reduce the voltage to values that wouldn't harm the sound card.
+
+Because the interesting thing is getting the voltage and the current intensity at exactly the same time, this might however not work really good because the two sound cards are working separately and a difference of a few milliseconds in the synchronisation of the two samplings might be a problem. Also, putting a voltmeter on the electrical panel might require an electrician.
+
 \section{Use multiple sensors}
+This might be obvious but instead of using one single sensor for the whole home, we could use one sensor per room for instance. Most electrical panels already split the network into multiple tracks for security reasons. Plugging one sensor per track wouldn't be an issue. 
+
+If we use this, we might also make the difference between fixed appliances (like a ceiling light or a microwave oven) and moving appliances (like a laptop charger). That way, it would be impossible to predict those fixed appliances for something happening in an other room that the one it is in.
+
+It is in some way a compromise between an intrusive and a non-intrusive load monitoring system.
+
+This would work greatly with this system as we have seen that we are having trouble mostly when there are multiple appliances running at the same time, but the detection has a good precision when there is not much other things going on.
+
+\section{Add logical rules}
+A model developed prior to this work used mostly logical rules with a \acrshort{hlmrf}. I don't think that using too much logical rules is a good idea but some more than the ones in this can be an improvement. For instance, only allowing the label \texttt{charger:plugcharger} after the label \texttt{charger:unplugcharger} was detected. Reducing the number of labels that can be detected could improve the precision of the algorithm.
+
+However, this could also reduce it. In the same example, if \texttt{charger:unplugcharger} was wrongly detected, I wouldn't be able to detect \texttt{charger:plug} anymore, for instance. 
+
+\section{Not simply add Real Faster Fourier Transforms vectors}
+After playing a while with the appliances, I noticed that the vectors do not simply add up when we combine to appliances. This is because the \acrshort{emi} emitted by an appliance depends on the signal it gets in (\autoref{section:fourier-system}).
+
+Even if it depends on the input voltage, and the potential difference should be stable (in an AC way), the input still changes a bit due to the current variations.
+
 \section{Develop automatic learning}
+One of the things that is the most problematic in this thesis is the lack of automatic learning.
 \subsection{For the metaparameters}
+There are multiple metaparameters in the algorithms.
+\begin{itemize}
+    \item Associator \begin{itemize}
+        \item the max distance threshold
+        \item $k$ of the \acrshort{knn}
+    \end{itemize}
+    \item Disaggregate \begin{itemize}
+        \item the size of vectors to smoothe the input
+        \item the sampling frequency
+        \item the sampling size
+    \end{itemize}
+    \item EventDetector \begin{itemize}
+        \item the max distance threshold
+        \item the linear decrements of the threshold
+        \item the exponential increment of the threshold
+    \end{itemize}
+\end{itemize}
+By running the algorithm with cross-validation of the parameters, we could get better values than the ones I got by manual testing. This would however be time consuming as the algorithm only works on real time. If we wanted to get the best value out of 5 for every one of those parameters by doing a grid search, we would need $5^8=390625$ times the length of the recording. Even if the recording is only 10 minutes long (which would not cover a lot of use cases), this would take more than 7 years to complete on a single computer. This is of course without taking into account that we could launch multiple cross-validations simultaneously on the same computer.
+
 \subsection{For the appliances}
+For now, errors made during the training phase have to be corrected manually. This is not practical for automatic learning. A system allowing to make this in an automated way would be a great improvement to the project.
+
 \section{Sample at higher rates}
+As done in \cite{gupta2010electrisense}, sampling at a much higher rate might give more insight about the features of certain labels. However, this would also mean that the costs would be greatly increased, going against the requirements of the project.
